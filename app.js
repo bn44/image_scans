@@ -21,7 +21,8 @@ io = sio.listen(server);
 var messages = [];
 //to transport the images information!
 var notes = [];
-
+var points = [];
+var pointsJson=JSON.stringify(points);
     // Define a message handler
     io.sockets.on('connection', function (socket) {
 	
@@ -34,11 +35,24 @@ var notes = [];
         // send messages to new clients
 	messages.forEach(function(msg) {
 	    socket.send(msg);
-	})
+	});
+	
+	notes.forEach(function(notes) {
+	    socket.send(notes);
+	});
+	
+	points.forEach(function(points) {
+	    socket.send(points);
+	});
+	
     });  
 				
     function Report(notes) {
 	io.sockets.emit('notes', notes);
+    };
+    
+    function features(points) {
+      io.sockets.emit('map',points); 
     };
     
 // Watch a directory or file
@@ -66,7 +80,7 @@ watchr.watch({
 	    
 	    
 	    
-	    console.log("___________File Change Info.______________");
+	    console.log("___________Any File Change Info.______________");
 	    console.log('Notes--------------->: ' + notes[notes.length-1]);
 	    console.log('change type--------->: ' + changeType);
 	    console.log('file Curren tStat--->: ' + fileCurrentStat);
@@ -84,20 +98,45 @@ watchr.watch({
 			     console.log('Error: '+error.message);
 			} else{
 			   
-			     //console.log(image);
+			     console.log(image);
 			     console.log("_______________________________");
-		 
-			     console.log(image.gps[5].tagName); // Do something with your data!
-			     console.log(image.gps[5].value);
+			    
+			     console.log(image.gps[3].tagName); // Do something with your data!
+			     console.log(image.gps[3].value[0]);
+			    
+			     console.log(image.gps[1].tagName); // Do something with your data!
+			     console.log(image.gps[1].value[0]);
+			     
+			    
+
 			    
 			     console.log("-------------------------------");
-                            
+                             points.push({geometry: {type: "Point", coordinates: [-1*image.gps[3].value[0],image.gps[1].value[0]]},
+					properties: {
+					  url: filePath,
+					  Make: image.image[0].value,
+					  Model: image.image[1].value,
+					  When: image.image[7].value}
+					});
+			var pointsJson = JSON.stringify(points);
+			    features(points);
+			
+			  	  console.log(points[0].properties.url);		  
+			    
+			    
+			    
+			    
+			    
+			    
      			     console.log("_______________________________");
 		             // lets do some JSON! 
 			     var imageJson = JSON.stringify(image);
 			     notes.push(changeType + ' ' + filePath);
-			     Report('Change Repport--------------->  : ' + notes[notes.length-1] );
-			     Report('The Location of This Image is ------>:'+image.gps[5].tagName);
+			     
+			     
+			     
+			     //Report('Change Repport--------------->  : ' + notes[notes.length-1] );
+			     //Report('The Location of This Image is ------>:'+image.gps[5].tagName);
 			     //console.log(imageJson);
 			     console.log("-------------------------------");
  
