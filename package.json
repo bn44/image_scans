@@ -1,0 +1,33 @@
+{
+  "author": "Keith Williams ",
+  "name": "Node_Image_watch",
+  "description": "Node App to watch a directory of files and return exif info",
+  "version": "0.1.1",
+  
+  "repository": {
+    "url": ""
+  },
+  
+  "main": "./lib/main",
+  
+  "bin": {
+    "replaceme": "./bin/exifwatch"
+  },
+  
+  "dependencies": {
+    "watchr": "~2.4.0",
+    "exif": "*",
+    "socket.io": "*"
+  },
+  
+  "devDependencies": {
+
+    "node-dev": "*"
+    },
+
+  "optionalDependencies": {},
+  
+  "engines": {
+    "node": "*"
+  }
+}
