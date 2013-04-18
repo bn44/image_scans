@@ -97,7 +97,7 @@
      7{ tag: <Buffer 01 32>,
        format: 2,
        components: 20,
-       value: '2012:11:23 00:55:15',//image[2].value
+       value: '2012:11:23 00:55:15',//image[7].value
        tagName: 'DateTime' },
      8{ tag: <Buffer 02 13>,
        format: 3,

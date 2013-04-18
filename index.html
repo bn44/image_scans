@@ -7,12 +7,27 @@
     #notes {color: white; background-color: rgb(185, 158, 188);}
     
     #map {
-      width: 600px;
+      width: 90%;
       height: 500px;
       margin: 0px auto 0px auto;
-      border: solid red;
-      border-width: 1px
+      /*border: solid;*/
+      border-width: 1px;
+      box-shadow: 2px 5px 20px
       }
+      
+      #wraper {
+        margin-top: 20px;
+      width: 90%;
+      height: 100px;
+      margin: 0px auto 0px auto;
+    
+      
+      
+      overflow: scroll
+      
+      
+      }
+    
     
   /*  #map { position:absolute; top:0; bottom:0; width:100%; }*/
       
@@ -101,7 +116,7 @@
 
             }); 
                   // Set iniital center and zoom
-                  map.centerzoom({lat: 40,lon: -85}, 4);
+                  map.centerzoom({lat: 41,lon: -73}, 7);
       
         });
       });
@@ -112,9 +127,12 @@
       
     </script>
     
-  </div>    
-  <ul id="notes"></ul> 
- <ul id="messages"></ul>
+  </div>
+  <div id="wraper">
+      <ul id="notes"></ul> 
+      <ul id="messages"></ul>
+  </div>
+ 
  <hr>
  <input type="text" id="chatmsg">
   

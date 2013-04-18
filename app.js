@@ -113,7 +113,7 @@ watchr.watch({
 			     console.log("-------------------------------");
                              points.push({geometry: {type: "Point", coordinates: [-1*image.gps[3].value[0],image.gps[1].value[0]]},
 					properties: {
-					  url: filePath,
+					  url: "1.jpg", // filePhath
 					  Make: image.image[0].value,
 					  Model: image.image[1].value,
 					  When: image.image[7].value}
