@@ -1,0 +1,17 @@
+extends layout
+
+block content    
+    h2 Contact US from here
+    form(method='post', action='./contactUs')
+        fieldset
+            legend Add a user
+            p
+                label First Name:
+                input (name='user[firstName]')
+            
+            p
+                label Last Name:
+                input (name='user[lastName]')
+                
+            p
+                input(type='submit', value='Submit')

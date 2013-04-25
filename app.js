@@ -1,14 +1,20 @@
 // Require
+var app = require('express')();
 var watchr = require('watchr');
 var fs = require('fs'),
     http = require('http'),
     sio = require('socket.io');
     
+    
+    
 
-var server = http.createServer(function(req, res) {
-  res.writeHead(200, { 'Content-type': 'text/html'});
-  res.end(fs.readFileSync('./index.html'));
-});
+//var server = http.createServer(function(req, res) {
+//  res.writeHead(200, { 'Content-type': 'text/html'});
+//  res.end(fs.readFileSync('./index.html'));
+//});
+
+var server = http.createServer(app);
+
 
 server.listen(3698, function() {
   console.log('Server listening at http://localhost:3698');
@@ -16,6 +22,15 @@ server.listen(3698, function() {
 
 // Attach the socket.io server
 io = sio.listen(server);
+
+app.get('/', function(req, res){
+  res.sendfile(__dirname + '/index.html');
+});
+
+app.get('/', function(req, res){
+  res.sendfile(__dirname + '/' +filePath);
+});
+
 
 //to keep track of the masseges on the chat
 var messages = [];
@@ -82,9 +97,9 @@ watchr.watch({
 	    
 	    console.log("___________Any File Change Info.______________");
 	    console.log('Notes--------------->: ' + notes[notes.length-1]);
-	    console.log('change type--------->: ' + changeType);
-	    console.log('file Curren tStat--->: ' + fileCurrentStat);
-	    console.log('file Previous Stat-->: ' + filePreviousStat);
+	    console.log('Change Type--------->: ' + changeType);
+	    console.log('file Current State--->: ' + fileCurrentStat);
+	    console.log('file Previous State-->: ' + filePreviousStat);
 	    
 	    console.log("------------------------------------------");
 	   
@@ -113,7 +128,7 @@ watchr.watch({
 			     console.log("-------------------------------");
                              points.push({geometry: {type: "Point", coordinates: [-1*image.gps[3].value[0],image.gps[1].value[0]]},
 					properties: {
-					  url: "1.jpg", // filePhath
+					  url: filePath, // filePhath
 					  Make: image.image[0].value,
 					  Model: image.image[1].value,
 					  When: image.image[7].value}
