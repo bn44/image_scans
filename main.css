@@ -1,0 +1,34 @@
+
+    #messages {
+        padding: 0px;
+        list-style-type: none;
+        }
+    
+    #messages li {
+        padding: 2px 0px;
+        border-bottom: 1px solid #ccc;
+        }
+   
+    #notes {
+        color: white;
+        background-color: rgb(185, 158, 188);
+        }
+    
+    #map {
+        width: 90%;
+        height: 500px;
+        margin: 0px auto 0px auto;
+        /*border: solid;*/
+        border-width: 1px;
+        box-shadow: 2px 5px 20px
+        }
+      
+    #wraper {
+        margin-top: 20px;
+        width: 90%;
+        height: 100px;
+        margin: 0px auto 0px auto; 
+        overflow: scroll
+        }
+
+    

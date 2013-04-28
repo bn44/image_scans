@@ -1,78 +1,87 @@
+
+
 <html>
 <head>
-  <style type="text/css">
-    #messages { padding: 0px; list-style-type: none;}
-    #messages li { padding: 2px 0px; border-bottom: 1px solid #ccc; }
-   
-    #notes {color: white; background-color: rgb(185, 158, 188);}
-    
-    #map {
-      width: 90%;
-      height: 500px;
-      margin: 0px auto 0px auto;
-      /*border: solid;*/
-      border-width: 1px;
-      box-shadow: 2px 5px 20px
-      }
-      
-      #wraper {
-        margin-top: 20px;
-      width: 90%;
-      height: 100px;
-      margin: 0px auto 0px auto;
-    
-      
-      
-      overflow: scroll
-      
-      
-      }
-    
-    
-  /*  #map { position:absolute; top:0; bottom:0; width:100%; }*/
-      
-    </style>
+  
    <script src='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.js'></script>
-  <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-  <script src="/socket.io/socket.io.js"></script>
-  <link href='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.css' rel='stylesheet' />
+   <script src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
+   <script src="/socket.io/socket.io.js"></script>
+   <link href='http://api.tiles.mapbox.com/mapbox.js/v0.6.7/mapbox.css' rel='stylesheet' />
+   <!--<link href='' rel='stylesheet' type='text/css' />-->
+ <style>
+   
+   
+   #messages {
+       padding: 0px;
+       list-style-type: none;
+       }
+   
+   #messages li {
+       padding: 2px 0px;
+       border-bottom: 1px solid #ccc;
+       }
   
-    
-
+   #notes {
+       color: white;
+       background-color: rgb(185, 158, 188);
+       }
+   
+   #map {
+       width: 90%;
+       height: 500px;
+       margin: 0px auto 0px auto;
+       /*border: solid;*/
+       border-width: 1px;
+       box-shadow: 2px 5px 20px
+       }
+     
+   #wraper {
+       margin-top: 20px;
+       width: 90%;
+       height: 100px;
+       margin: 0px auto 0px auto; 
+       overflow: scroll
+       }
+ 
+   
+   
+ </style>
+     
+ 
+   
+ <script>
   
-  <script>
-  $(function(){
-    var socket = io.connect();
-    
-    socket.on('connect', function () {
-      
-      socket.on('message', function(message) {
-        $('#messages').append($('<li></li>').text(message));
-      });
-      
-      socket.on('notes', function(notes){
-        $('#notes').append($('<li></li>').text(notes));
-      });
-      
-      socket.on('disconnect', function() {
-        $('#messages').append('<li>Disconnected</li>');
-      });
-      
-    });
-  
-    var el = $('#chatmsg');
-    $('#chatmsg').keypress(function(e) {
-      if(e.which == 13) {
-        e.preventDefault();
-        socket.send(el.val());
-        $('#messages').append($('<li></li>').text(el.val()));
-        el.val('');
-      }
-    });
-  });
-  
-  
-  </script>
+   $(function(){
+     var socket = io.connect();
+     
+     socket.on('connect', function () {
+       
+       socket.on('message', function(message) {
+         $('#messages').append($('<li></li>').text(message));
+       });
+       
+       socket.on('notes', function(notes){
+         $('#notes').append($('<li></li>').text(notes));
+       });
+       
+       socket.on('disconnect', function() {
+         $('#messages').append('<li>Disconnected</li>');
+       });
+       
+     });
+   
+     var el = $('#chatmsg');
+     $('#chatmsg').keypress(function(e) {
+       if(e.which == 13) {
+         e.preventDefault();
+         socket.send(el.val());
+         $('#messages').append($('<li></li>').text(el.val()));
+         el.val('');
+       }
+     });
+   });
+ 
+ </script>
   
 </head>
 <body>
